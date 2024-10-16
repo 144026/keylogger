@@ -105,7 +105,7 @@ int compare_freq(const void *_a, const void *_b)
 {
 	const struct dict_item *a = _a;
 	const struct dict_item *b = _b;
-	return a->val.number - b->val.number;
+	return b->val.number - a->val.number;
 }
 
 static struct dict compute_keystat(struct keylog *kl) {
