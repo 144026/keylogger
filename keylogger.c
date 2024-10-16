@@ -22,7 +22,7 @@ static void logTimestamp(void) {
 
     // remove newline
     s[26-2] = '\0';
-    fprintf(logfile, "\n\n[keycount %lld timestamp %s]\n", keycount, s);
+    fprintf(logfile, "\n\n[keycount %lld timestamp %s]", keycount, s);
     fflush(logfile);
 }
 

@@ -55,7 +55,11 @@ static int eat_tag_token(struct keylog *kl, struct cursor *cursor, struct token 
 	int c;
 
 	while ((c = fgetc(kl->log)) != EOF) {
-		if (c == '[') {
+		// XXX: Historically, we put a '\n' after all builtin keycount tags mistakenly,
+		// which screwed up log file syntax.
+		// If parsing such old logs, we have f**king way to know if this is a converted
+		// KeyCode name, OR a key sequence that our user literally typed by hand.
+		if (c == '[' || (tok->len == 1 && c == ']')) {
 			ungetc(c, kl->log);
 			cursor->tag_allowed = 0;
 			return 0;
